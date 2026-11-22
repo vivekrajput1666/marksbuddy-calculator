@@ -1,8 +1,6 @@
-import { Routes, Route, Link } from "react-router-dom";
-import CGPACalculatorPage from "./pages/CgpaCalculatorPage";
-import PercentageCalculatorPage from "./pages/PercentageCalculatorPage";
+import { Link } from "react-router-dom";
 
-function HomePage() {
+export function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Navigation */}
@@ -248,22 +246,3 @@ function HomePage() {
   );
 }
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-
-      <Route
-        path="/percentage-calculator"
-        element={<PercentageCalculatorPage />}
-      />
-
-      <Route
-        path="/cgpa-calculator"
-        element={<CGPACalculatorPage />}
-      />
-    </Routes>
-  );
-}
-
-export default App;
