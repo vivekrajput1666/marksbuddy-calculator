@@ -3,51 +3,131 @@ import { Link } from "react-router-dom";
 import Calculator from "../components/calculator";
 
 function PercentageCalculatorPage() {
-  useEffect(() => {
+useEffect(() => {
+  const pageTitle =
+    "Percentage Calculator Online – Free Exam Marks Calculator | MarksBuddy";
+
+  const description =
+    "Calculate your exam percentage online for free. Enter obtained marks and total marks to get instant results. Learn percentage formulas and examples with MarksBuddy.";
+
+  const canonicalUrl =
+    "https://marksbuddy-calculator.vercel.app/percentage-calculator";
+
+  document.title = pageTitle;
+
+  // Helper to create or update meta tags
+  const updateMeta = (
+    selector: string,
+    attribute: string,
+    value: string
+  ) => {
+    let element = document.head.querySelector<HTMLMetaElement>(selector);
+
+    if (!element) {
+      element = document.createElement("meta");
+      document.head.appendChild(element);
+    }
+
+    element.setAttribute(attribute, value);
+  };
+
+  // Description
+  updateMeta(
+    'meta[name="description"]',
+    "content",
+    description
+  );
+
+  // Open Graph
+  updateMeta(
+    'meta[property="og:title"]',
+    "content",
+    pageTitle
+  );
+
+  updateMeta(
+    'meta[property="og:description"]',
+    "content",
+    description
+  );
+
+  updateMeta(
+    'meta[property="og:url"]',
+    "content",
+    canonicalUrl
+  );
+
+  // Twitter
+  updateMeta(
+    'meta[name="twitter:title"]',
+    "content",
+    pageTitle
+  );
+
+  updateMeta(
+    'meta[name="twitter:description"]',
+    "content",
+    description
+  );
+
+  // Canonical URL
+  let canonical =
+    document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.rel = "canonical";
+    document.head.appendChild(canonical);
+  }
+
+  canonical.href = canonicalUrl;
+
+  // Restore homepage metadata when leaving this page
+  return () => {
     document.title =
-      "Free Percentage Calculator Online | Exam Marks Calculator - MarksBuddy";
+      "Free Percentage & CGPA Calculator Online | MarksBuddy";
 
-    const description =
-      "Calculate your exam percentage online for free with MarksBuddy. Enter obtained marks and total marks to get instant results. Learn percentage formulas and examples.";
-
-    let meta = document.querySelector('meta[name="description"]');
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-
-    meta.setAttribute("content", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-
-    canonical.setAttribute(
-      "href",
-      "https://marksbuddy-calculator.vercel.app/percentage-calculator"
+    updateMeta(
+      'meta[name="description"]',
+      "content",
+      "Calculate your exam percentage and CGPA instantly with MarksBuddy. Free online student calculators."
     );
 
-    return () => {
-      document.title =
-        "Free Percentage & CGPA Calculator Online | MarksBuddy";
+    updateMeta(
+      'meta[property="og:title"]',
+      "content",
+      "Free Percentage & CGPA Calculator Online | MarksBuddy"
+    );
 
-      meta?.setAttribute(
-        "content",
-        "Calculate your exam percentage and CGPA instantly with MarksBuddy. Free online student calculators."
-      );
+    updateMeta(
+      'meta[property="og:description"]',
+      "content",
+      "Calculate your exam percentage and CGPA instantly with free online student calculators."
+    );
 
-      canonical?.setAttribute(
-        "href",
-        "https://marksbuddy-calculator.vercel.app/"
-      );
-    };
-  }, []);
+    updateMeta(
+      'meta[property="og:url"]',
+      "content",
+      "https://marksbuddy-calculator.vercel.app/"
+    );
+
+    updateMeta(
+      'meta[name="twitter:title"]',
+      "content",
+      "Free Percentage & CGPA Calculator | MarksBuddy"
+    );
+
+    updateMeta(
+      'meta[name="twitter:description"]',
+      "content",
+      "Calculate your exam percentage and CGPA instantly with MarksBuddy."
+    );
+
+    if (canonical) {
+      canonical.href = "https://marksbuddy-calculator.vercel.app/";
+    }
+  };
+}, []);
 
   const faqs = [
     {
