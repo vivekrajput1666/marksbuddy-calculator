@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Navigation */}

@@ -1,134 +1,38 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Calculator from "../components/calculator";
 
-function PercentageCalculatorPage() {
-useEffect(() => {
-  const pageTitle =
+export function meta() {
+  const title =
     "Percentage Calculator Online – Free Exam Marks Calculator | MarksBuddy";
 
   const description =
     "Calculate your exam percentage online for free. Enter obtained marks and total marks to get instant results. Learn percentage formulas and examples with MarksBuddy.";
 
-  const canonicalUrl =
-    "https://marksbuddy-calculator.vercel.app/percentage-calculator";
+  return [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    {
+      property: "og:url",
+      content:
+        "https://marksbuddy-calculator.vercel.app/percentage-calculator",
+    },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+  ];
+}
 
-  document.title = pageTitle;
+export function links() {
+  return [
+    {
+      rel: "canonical",
+      href: "https://marksbuddy-calculator.vercel.app/percentage-calculator",
+    },
+  ];
+}
 
-  // Helper to create or update meta tags
-  const updateMeta = (
-    selector: string,
-    attribute: string,
-    value: string
-  ) => {
-    let element = document.head.querySelector<HTMLMetaElement>(selector);
-
-    if (!element) {
-      element = document.createElement("meta");
-      document.head.appendChild(element);
-    }
-
-    element.setAttribute(attribute, value);
-  };
-
-  // Description
-  updateMeta(
-    'meta[name="description"]',
-    "content",
-    description
-  );
-
-  // Open Graph
-  updateMeta(
-    'meta[property="og:title"]',
-    "content",
-    pageTitle
-  );
-
-  updateMeta(
-    'meta[property="og:description"]',
-    "content",
-    description
-  );
-
-  updateMeta(
-    'meta[property="og:url"]',
-    "content",
-    canonicalUrl
-  );
-
-  // Twitter
-  updateMeta(
-    'meta[name="twitter:title"]',
-    "content",
-    pageTitle
-  );
-
-  updateMeta(
-    'meta[name="twitter:description"]',
-    "content",
-    description
-  );
-
-  // Canonical URL
-  let canonical =
-    document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-
-  if (!canonical) {
-    canonical = document.createElement("link");
-    canonical.rel = "canonical";
-    document.head.appendChild(canonical);
-  }
-
-  canonical.href = canonicalUrl;
-
-  // Restore homepage metadata when leaving this page
-  return () => {
-    document.title =
-      "Free Percentage & CGPA Calculator Online | MarksBuddy";
-
-    updateMeta(
-      'meta[name="description"]',
-      "content",
-      "Calculate your exam percentage and CGPA instantly with MarksBuddy. Free online student calculators."
-    );
-
-    updateMeta(
-      'meta[property="og:title"]',
-      "content",
-      "Free Percentage & CGPA Calculator Online | MarksBuddy"
-    );
-
-    updateMeta(
-      'meta[property="og:description"]',
-      "content",
-      "Calculate your exam percentage and CGPA instantly with free online student calculators."
-    );
-
-    updateMeta(
-      'meta[property="og:url"]',
-      "content",
-      "https://marksbuddy-calculator.vercel.app/"
-    );
-
-    updateMeta(
-      'meta[name="twitter:title"]',
-      "content",
-      "Free Percentage & CGPA Calculator | MarksBuddy"
-    );
-
-    updateMeta(
-      'meta[name="twitter:description"]',
-      "content",
-      "Calculate your exam percentage and CGPA instantly with MarksBuddy."
-    );
-
-    if (canonical) {
-      canonical.href = "https://marksbuddy-calculator.vercel.app/";
-    }
-  };
-}, []);
-
+function PercentageCalculatorPage() {
   const faqs = [
     {
       question: "How do I calculate percentage from marks?",
